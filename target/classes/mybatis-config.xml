@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--通过properties标签加载外部properties文件-->
+
+    <properties resource="jdbc.properties"/>
+
+    <!--别名   com.example.pojo.User->user-->
+    <typeAliases>
+        <package name="com.example.pojo"/>
+    </typeAliases>
+
+
+    <!--
+    environments：配置数据库连接环境信息。可以配置多个environment，通过default属性切换不同的environment
+    -->
+    <environments default="development">
+
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--数据库连接信息-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}?useSSL=false&amp;useServerPreStmts=true"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+
+<!--        <environment id="development">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash;数据库连接信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql://123.56.129.233/db1?useSSL=false&amp;useServerPreStmts=true"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="824320xh@XH"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+
+<!--        <environment id="test">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash;数据库连接信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql:///mybatis?useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="1234"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+    </environments>
+
+    <mappers>
+        <!--加载sql映射文件-->
+        <!--<mapper resource="xh/app/mapper/UserMapper.xml"/>-->
+        <!--mapper代理方式-->
+        <package name="com.example.mapper"/>
+    </mappers>
+</configuration>

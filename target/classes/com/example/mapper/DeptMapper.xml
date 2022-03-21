@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.DeptMapper">
+
+    <resultMap id="deptMap" type="dept">
+
+        <result column="DWBH" property="deptNo"></result>
+        <result column="DWMC" property="deptName"></result>
+        <result column="DWXZ" property="deptNature"></result>
+        <result column="DWBZ" property="remarks"></result>
+    </resultMap>
+    <insert id="addDept">
+        insert into G_BM
+        values (null,#{deptNo},#{deptName},#{parentId},#{deptNature},#{remarks})
+    </insert>
+    <update id="updateDeptById">
+        update G_BM
+        set DWBH=#{deptNo},DWMC=#{deptName},parentId=#{parentId},
+            DWXZ=#{deptNature},DWBZ=#{remarks}
+        where id=#{id}
+    </update>
+    <delete id="deleteDeptById">
+        delete from G_BM where id=#{id}
+    </delete>
+
+
+    <select id="selectDeptAll" resultMap="deptMap">
+        select * from G_BM
+    </select>
+</mapper>
