@@ -6,7 +6,7 @@ public class Menu {
     private String state;//默认打开还是关闭
     private String iconCls;//导航图标
     private Integer parentId;//父级id
-    private Float sort;//排序字段
+//    private Float sort;//排序字段
     private String description;//导航说明
 
     public Integer getId() {
@@ -48,14 +48,14 @@ public class Menu {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
-
-    public Float getSort() {
-        return sort;
-    }
-
-    public void setSort(Float sort) {
-        this.sort = sort;
-    }
+//
+//    public Float getSort() {
+//        return sort;
+//    }
+//
+//    public void setSort(Float sort) {
+//        this.sort = sort;
+//    }
 
     public String getDescription() {
         return description;
@@ -73,7 +73,6 @@ public class Menu {
                 ", state='" + state + '\'' +
                 ", iconCls='" + iconCls + '\'' +
                 ", parentId=" + parentId +
-                ", sort=" + sort +
                 ", description='" + description + '\'' +
                 '}';
     }

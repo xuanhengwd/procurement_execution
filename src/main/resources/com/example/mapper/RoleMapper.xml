@@ -8,4 +8,7 @@
 <mapper namespace="com.example.mapper.RoleMapper">
 
 
+<!--    <select id="selectRoleAll" resultType="com.example.pojo.Role">-->
+<!--        select * from G_DHCD where id in(select qx.naviId from G_JS js,G_JSQX qx where js.id=qx.roleId);-->
+<!--    </select>-->
 </mapper>

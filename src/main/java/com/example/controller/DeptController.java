@@ -55,11 +55,53 @@ public class DeptController {
         return "true";
     }
 
+    /**
+     * 批量查询
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/deleteDeptByIds",method = RequestMethod.POST)
+    @ResponseBody
+    String deleteDeptByIds(int[] ids){
+        deptService.deleteDeptByIds(ids);
+        return "true";
+    }
+
+
+    /**
+     * 修改部门信息
+     * @param dept
+     * @return
+     */
     @RequestMapping(value = "/updateDeptById",method = RequestMethod.POST)
     @ResponseBody
     String updateDeptById(Dept dept){
         deptService.updateDeptById(dept);
         return "true";
     }
+
+    /**
+     * 条件查询
+     * @param dept
+     * @return
+     */
+    @RequestMapping(value = "/selectDeptByCondition",method = RequestMethod.POST)
+    @ResponseBody
+    List<Dept> selectDeptByCondition(Dept dept){
+        List<Dept> depts = deptService.selectDeptByCondition(dept);
+        return depts;
+    }
+
+    /**
+     * 查询所有部门的数量
+     * @return
+     */
+    @RequestMapping(value = "/deptCount",method = RequestMethod.POST)
+    @ResponseBody
+    int deptCount(){
+        return deptService.deptCount();
+    }
+
+
 
 }

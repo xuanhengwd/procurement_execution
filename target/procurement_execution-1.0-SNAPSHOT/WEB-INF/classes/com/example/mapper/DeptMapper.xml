@@ -27,9 +27,33 @@
     <delete id="deleteDeptById">
         delete from G_BM where id=#{id}
     </delete>
+    <delete id="deleteDeptByIds">
+        delete from G_BM where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+
+    </delete>
 
 
     <select id="selectDeptAll" resultMap="deptMap">
         select * from G_BM
+    </select>
+    <select id="selectDeptByCondition" resultMap="deptMap">
+        select * from G_BM
+        <where>
+            <if test="deptName!=null and deptName!=''">
+                and DWMC like #{deptName}
+            </if>
+            <if test="deptNo!=null and deptNo!=''">
+                and DWBH like #{deptNo}
+            </if>
+        </where>
+
+
+    </select>
+    <select id="deptCount" resultType="java.lang.Integer">
+        select count(*)
+        from G_BM;
     </select>
 </mapper>

@@ -9,4 +9,5 @@ public interface RoleMapper {
 
     @Select("select * from G_JS")
     List<Role> selectRoleAll();
+
 }

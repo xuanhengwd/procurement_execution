@@ -30,8 +30,36 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
+    public void deleteDeptByIds(int[] ids) {
+
+        deptMapper.deleteDeptByIds(ids);
+    }
+
+    @Override
     public void updateDeptById(Dept dept) {
         deptMapper.updateDeptById(dept);
+    }
+
+    @Override
+    public List<Dept> selectDeptByCondition(Dept dept) {
+
+        String deptName = dept.getDeptName();
+        String deptNo = dept.getDeptNo();
+        if (deptName != null && deptName.length() > 0) {
+            dept.setDeptName("%"+deptName+"%");
+        }
+        if (deptNo != null && deptNo.length() > 0) {
+            dept.setDeptNo("%"+deptNo+"%");
+        }
+
+        List<Dept> depts = deptMapper.selectDeptByCondition(dept);
+        return depts;
+    }
+
+    @Override
+    public int deptCount() {
+        int count = deptMapper.deptCount();
+        return count;
     }
 
 

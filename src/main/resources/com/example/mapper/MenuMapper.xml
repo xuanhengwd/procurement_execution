@@ -8,5 +8,8 @@
 <mapper namespace="com.example.mapper.MenuMapper">
 
 
-
+    <insert id="addMenu">
+        insert into G_DHCD
+        values (null,#{text},#{state},#{iconCls},#{parentId},#{description})
+    </insert>
 </mapper>
