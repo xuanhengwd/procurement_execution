@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.pojo.Dept;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,9 +29,9 @@ public interface DeptMapper {
 
     /**
      * 批量删除
-     * @param ints
+     * @param ids
      */
-    void deleteDeptByIds(@Param("ids") int[] ints);
+    void deleteDeptByIds(@Param("ids") int[] ids);
 
     /**
      * 根据id修改部门信息

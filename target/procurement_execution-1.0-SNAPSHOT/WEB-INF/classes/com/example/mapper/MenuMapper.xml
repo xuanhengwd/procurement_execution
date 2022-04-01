@@ -7,9 +7,60 @@
 
 <mapper namespace="com.example.mapper.MenuMapper">
 
+    <resultMap id="menuMap" type="menu">
+        <result column="parent_id" property="parentId"></result>
+    </resultMap>
 
     <insert id="addMenu">
-        insert into G_DHCD
-        values (null,#{text},#{state},#{iconCls},#{parentId},#{description})
+        insert into menu
+        values (null,#{name},#{state},#{iconCls},#{parentId},#{description})
     </insert>
+
+    <delete id="deleteMenuById">
+        delete from menu where id = #{id}
+    </delete>
+    <delete id="deleteRolePerByMenuId">
+        delete from role_permission where menu_id = #{id};
+    </delete>
+
+
+    <select id="selectMenuAll" resultMap="menuMap">
+        select * from menu
+    </select>
+
+    <update id="updateMenuById">
+        update menu
+        set name=#{name},state=#{state},iconCls=#{iconCls},
+            parent_id=#{parentId},description=#{description}
+        where id=#{id}
+    </update>
+
+    <select id="selectMenuByCondition" resultMap="menuMap">
+        select * from menu
+        <where>
+            <if test="name!=null and name!=''">
+                and name like #{name}
+            </if>
+            <if test="state!=null and state!=''">
+                and state like #{state}
+            </if>
+        </where>
+    </select>
+    <select id="menuCount" resultType="java.lang.Integer">
+        select count(*) from menu
+    </select>
+
+
+    <delete id="deleteMenuByIds">
+        delete from menu where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteRolePerByMenuIds">
+        delete from role_permission where role_permission.menu_id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

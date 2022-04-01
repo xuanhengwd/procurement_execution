@@ -56,7 +56,7 @@ public class DeptController {
     }
 
     /**
-     * 批量查询
+     * 批量删除
      * @param ids
      * @return
      */

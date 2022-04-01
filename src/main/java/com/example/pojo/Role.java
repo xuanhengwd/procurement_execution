@@ -12,7 +12,7 @@ public class Role {
 //    private Integer priority;
 
     //菜单
-    private List<Menu> menus = new ArrayList<>();
+//    private List<Menu> menus = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -44,7 +44,6 @@ public class Role {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", menus=" + menus +
                 '}';
     }
 }

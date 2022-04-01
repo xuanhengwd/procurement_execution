@@ -2,7 +2,7 @@ package com.example.pojo;
 
 public class Menu {
     private Integer id;
-    private String text;//导航名称
+    private String name;//导航名称
     private String state;//默认打开还是关闭
     private String iconCls;//导航图标
     private Integer parentId;//父级id
@@ -17,12 +17,12 @@ public class Menu {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getState() {
@@ -69,7 +69,7 @@ public class Menu {
     public String toString() {
         return "Menu{" +
                 "id=" + id +
-                ", text='" + text + '\'' +
+                ", text='" + name + '\'' +
                 ", state='" + state + '\'' +
                 ", iconCls='" + iconCls + '\'' +
                 ", parentId=" + parentId +
