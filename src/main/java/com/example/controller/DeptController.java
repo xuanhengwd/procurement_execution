@@ -3,20 +3,33 @@ package com.example.controller;
 
 import com.example.pojo.Dept;
 import com.example.service.DeptService;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller("deptController")
 @RequestMapping("/dept")
 public class DeptController {
 
-    @Autowired
-    private DeptService deptService;
+    private final DeptService deptService;
+
+    public DeptController(DeptService deptService) {
+        this.deptService = deptService;
+    }
 
     /**
      * 查询所有
@@ -101,6 +114,82 @@ public class DeptController {
     int deptCount(){
         return deptService.deptCount();
     }
+
+
+    /**
+     * Excle 批量导入
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/addDepts",method = RequestMethod.POST)
+    @ResponseBody
+    String  addDepts(MultipartFile file) throws Exception{
+        if(file==null){
+            return "false";
+        }
+        String fileName = file.getOriginalFilename();
+        long size=file.getSize();
+        if(fileName==null || ("").equals(fileName) && size==0)
+            return "false";
+
+        System.out.println(fileName);
+        // 获取文件后缀
+        String prefix=fileName.substring(fileName.lastIndexOf("."));
+        if (!prefix.toLowerCase().contains("xls") && !prefix.toLowerCase().contains("xlsx") ) {
+            return "false";
+        }
+
+        final File excelFile = File.createTempFile(System.currentTimeMillis()+"", prefix);
+        file.transferTo(excelFile);
+
+
+        boolean isExcel2003 = prefix.toLowerCase().endsWith("xls")?true:false;
+        Workbook workbook = null;
+        if(isExcel2003){
+            workbook = new HSSFWorkbook(new FileInputStream(excelFile));
+        }else{
+            workbook = new XSSFWorkbook(new FileInputStream(excelFile));
+        }
+
+        //Excel表中的内容
+        List<Dept> depts = new ArrayList<>();
+
+        Sheet sheet = workbook.getSheetAt(0);
+        for(int i=1; i<sheet.getLastRowNum()+1; i++) {
+            Row row =sheet.getRow(i);
+            if(row==null)
+                continue;
+            Dept dept = new Dept();
+            for(int j=0;j<row.getLastCellNum();j++){
+                Cell cell = row.getCell(j);
+                if(cell!=null){
+                    cell.setCellType(CellType.STRING);
+                    if(j==0){
+                        dept.setDeptNo(cell.getStringCellValue());
+                    }else if(j==1){
+                        dept.setDeptName(cell.getStringCellValue());
+                    }else if(j==2){
+                        dept.setParentId(Integer.valueOf(cell.getStringCellValue()));
+                    }else if(j==3){
+                        dept.setDeptNature(cell.getStringCellValue());
+                    }else if(j==4){
+                        dept.setRemarks(cell.getStringCellValue());
+                    }
+                }
+
+            }
+            depts.add(dept);
+        }
+        //删除临时转换的文件
+        if (excelFile.exists()) {
+            excelFile.delete();
+        }
+        Boolean flag = deptService.addDepts(depts);
+
+        return flag?"true":"false";
+    }
+
+
 
 
 

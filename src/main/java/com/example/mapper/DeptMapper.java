@@ -22,6 +22,13 @@ public interface DeptMapper {
 
 
     /**
+     * 批量导入
+     * @param depts
+     */
+    void addDepts(@Param("depts") List<Dept> depts);
+
+
+    /**
      * 根据id删除部门
      * @param id
      */

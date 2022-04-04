@@ -64,7 +64,7 @@ public class Dept {
                 ", deptName='" + deptName + '\'' +
                 ", parentId=" + parentId +
                 ", deptNature='" + deptNature + '\'' +
-                ", deptSign='" + remarks + '\'' +
+                ", remarks='" + remarks + '\'' +
                 '}';
     }
 }

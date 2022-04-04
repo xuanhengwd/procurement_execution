@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.LocationMapper">
+
+    <resultMap id="locationMap" type="location">
+        <result column="location_no" property="locationNo"></result>
+        <result column="location_name" property="locationName"></result>
+        <result column="dept_no" property="deptNo"></result>
+        <result column="dept_name" property="deptName"></result>
+    </resultMap>
+
+
+    <select id="selectLocationAll" resultMap="locationMap">
+        select * from storage_location
+    </select>
+
+
+    <insert id="addLocation">
+        insert into storage_location(location_no, location_name, dept_no, dept_name)
+        values (#{locationNo},#{locationName},#{deptNo},#{deptName})
+    </insert>
+
+    <delete id="deleteLocationById">
+        delete from storage_location where id = #{id}
+    </delete>
+    <delete id="deleteLocationByIds">
+        delete from storage_location where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateLocationById">
+        update storage_location set
+        location_no=#{locationNo},location_name=#{locationName},dept_no=#{deptNo},dept_name=#{deptName}
+        where id=#{id}
+    </update>
+
+    <select id="selectLocationByCondition" resultType="com.example.pojo.Location">
+        select * from storage_location
+        <where>
+            <if test="locationName!=null and locationName!=''">
+                and location_name like #{locationName}
+            </if>
+            <if test="deptName!=null and deptName!=''">
+                and dept_name like #{deptName}
+            </if>
+        </where>
+    </select>
+    <select id="locationCount" resultType="java.lang.Integer">
+        select count(*) from storage_location
+    </select>
+
+</mapper>

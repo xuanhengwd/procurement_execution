@@ -20,6 +20,16 @@
         insert into department
         values (null,#{deptNo},#{deptName},#{parentId},#{deptNature},#{remarks})
     </insert>
+    <insert id="addDepts">
+        insert into department(dept_no, dept_name, parent_id, dept_nature, remarks) values
+        <foreach collection="depts" item="dept" separator=",">
+           ( #{dept.deptNo},
+            #{dept.deptName},
+            #{dept.parentId},
+            #{dept.deptNature},
+            #{dept.remarks} )
+        </foreach>
+    </insert>
 
     <update id="updateDeptById">
         update department

@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.pojo.Dept;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,4 +29,7 @@ public interface DeptService {
     List<Dept> selectDeptByCondition(Dept dept);
 
     int deptCount();
+
+    //批量导入
+    Boolean addDepts(List<Dept> depts);
 }

@@ -6,6 +6,7 @@ import com.example.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service("deptService")
@@ -60,6 +61,16 @@ public class DeptServiceImpl implements DeptService {
     public int deptCount() {
         int count = deptMapper.deptCount();
         return count;
+    }
+
+    @Override
+    public Boolean addDepts(List<Dept> depts) {
+        boolean f = false;
+        System.out.println(depts);
+        deptMapper.addDepts(depts);
+        f=true;
+        return f;
+
     }
 
 

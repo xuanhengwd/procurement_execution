@@ -37,6 +37,13 @@
         <property name="basePackage" value="com.example.mapper"></property>
     </bean>
 
+    <!--配置文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF_8"></property>
+        <!--大小10M-->
+        <property name="maxUploadSize" value="10485760"></property>
+    </bean>
+
     <!--组件扫描 service dao-->
     <context:component-scan base-package="com.example">
         <!--排除controller的扫描-->
