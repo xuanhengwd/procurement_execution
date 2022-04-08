@@ -5,6 +5,7 @@ import com.example.pojo.Menu;
 import com.example.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Controller("menuController")
 @RequestMapping("/menu")
+@CrossOrigin
 public class MenuController {
     @Autowired
     private MenuService menuService;
@@ -46,7 +48,7 @@ public class MenuController {
     @RequestMapping(value = "/deleteMenuById",method = RequestMethod.POST)
     @ResponseBody
     String deleteMenuById(int id){
-        System.out.println("C:"+id);
+//        System.out.println("C:"+id);
         menuService.deleteMenuById(id);
         return "true";
     }
@@ -72,6 +74,7 @@ public class MenuController {
     @RequestMapping(value = "/selectMenuByCondition",method = RequestMethod.POST)
     @ResponseBody
     List<Menu> selectMenuByCondition(Menu menu){
+//        System.out.println(menu);
         List<Menu> menus = menuService.selectMenuByCondition(menu);
         return menus;
     }

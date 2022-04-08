@@ -4,14 +4,17 @@ import com.example.pojo.Role;
 import com.example.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @RequestMapping("/role")
+@CrossOrigin
 public class RoleController {
 
     private final RoleService roleService;
@@ -62,6 +65,7 @@ public class RoleController {
     @RequestMapping(value = "/addRole",method = RequestMethod.POST)
     @ResponseBody
     String addRole(Role role,int[] menuIds){
+        System.out.println(role);
         roleService.addRole(role,menuIds);
         return "true";
     }
@@ -99,6 +103,9 @@ public class RoleController {
     int roleCount(){
         return roleService.roleCount();
     }
+
+
+
 
 
 }

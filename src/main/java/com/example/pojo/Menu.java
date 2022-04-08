@@ -69,7 +69,7 @@ public class Menu {
     public String toString() {
         return "Menu{" +
                 "id=" + id +
-                ", text='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", state='" + state + '\'' +
                 ", iconCls='" + iconCls + '\'' +
                 ", parentId=" + parentId +

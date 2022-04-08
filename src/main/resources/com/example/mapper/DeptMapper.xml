@@ -16,10 +16,13 @@
     </resultMap>
 
 
+    <!--添加部门信息-->
     <insert id="addDept">
         insert into department
         values (null,#{deptNo},#{deptName},#{parentId},#{deptNature},#{remarks})
     </insert>
+
+    <!--批量添加-->
     <insert id="addDepts">
         insert into department(dept_no, dept_name, parent_id, dept_nature, remarks) values
         <foreach collection="depts" item="dept" separator=",">
@@ -31,6 +34,7 @@
         </foreach>
     </insert>
 
+    <!--修改-->
     <update id="updateDeptById">
         update department
         set dept_no=#{deptNo},dept_name=#{deptName},parent_id=#{parentId},
@@ -38,10 +42,12 @@
         where id=#{id}
     </update>
 
+    <!--删除-->
     <delete id="deleteDeptById">
         delete from department where id=#{id}
     </delete>
 
+    <!--批量删除-->
     <delete id="deleteDeptByIds">
         delete from department where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">
@@ -51,10 +57,12 @@
     </delete>
 
 
+    <!--查询所有-->
     <select id="selectDeptAll" resultMap="deptMap">
         select * from department
     </select>
 
+    <!--条件查询-->
     <select id="selectDeptByCondition" resultMap="deptMap">
         select * from department
         <where>
@@ -69,6 +77,7 @@
 
     </select>
 
+    <!--数量-->
     <select id="deptCount" resultType="java.lang.Integer">
         select count(*)
         from department;

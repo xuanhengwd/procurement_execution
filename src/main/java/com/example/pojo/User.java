@@ -3,20 +3,26 @@ package com.example.pojo;
 import java.util.Date;
 
 public class User {
+    private Integer id;
     private String userNo;
     private String userName;
     private String password;
     private String name;
-    private Date birthday;
+    private String birthDate;
     private String sex;
     private String deptNo;
     private String deptName;
     private String cellphone;
     private String email;
+    private Integer roleId;
 
+    public Integer getId() {
+        return id;
+    }
 
-    //Role
-    private Role role;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUserNo() {
         return userNo;
@@ -50,12 +56,12 @@ public class User {
         this.name = name;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getSex() {
@@ -98,28 +104,30 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userNo='" + userNo + '\'' +
+                "id=" + id +
+                ", userNo='" + userNo + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", birthday=" + birthday +
+                ", birthDate='" + birthDate + '\'' +
                 ", sex='" + sex + '\'' +
                 ", deptNo='" + deptNo + '\'' +
                 ", deptName='" + deptName + '\'' +
                 ", cellphone='" + cellphone + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
+                ", roleId=" + roleId +
                 '}';
     }
+
 }

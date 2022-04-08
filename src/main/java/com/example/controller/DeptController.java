@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import java.util.Map;
 
 @Controller("deptController")
 @RequestMapping("/dept")
+@CrossOrigin
 public class DeptController {
 
     private final DeptService deptService;
@@ -33,49 +35,52 @@ public class DeptController {
 
     /**
      * 查询所有
+     *
      * @return
      */
     @RequestMapping("/selectDeptAll")
     @ResponseBody
-    List<Dept> selectDeptAll(){
+    List<Dept> selectDeptAll() {
         List<Dept> depts = deptService.selectDeptAll();
-        System.out.println(depts);
         return depts;
     }
 
     /**
      * 添加部门
+     *
      * @param dept
      * @return
      */
-    @RequestMapping(value = "/addDept",method = RequestMethod.POST)
+    @RequestMapping(value = "/addDept", method = RequestMethod.POST)
     @ResponseBody
-    String addDept(Dept dept){
-        System.out.println(dept);
+    String addDept(Dept dept) {
+
         deptService.addDept(dept);
         return "true";
     }
 
     /**
      * 根据id删除部门信息
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value = "/deleteDeptById",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteDeptById", method = RequestMethod.POST)
     @ResponseBody
-    String deleteDeptById(int id){
+    String deleteDeptById(int id) {
         deptService.deleteDeptById(id);
         return "true";
     }
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
-    @RequestMapping(value = "/deleteDeptByIds",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteDeptByIds", method = RequestMethod.POST)
     @ResponseBody
-    String deleteDeptByIds(int[] ids){
+    String deleteDeptByIds(int[] ids) {
         deptService.deleteDeptByIds(ids);
         return "true";
     }
@@ -83,71 +88,76 @@ public class DeptController {
 
     /**
      * 修改部门信息
+     *
      * @param dept
      * @return
      */
-    @RequestMapping(value = "/updateDeptById",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateDeptById", method = RequestMethod.POST)
     @ResponseBody
-    String updateDeptById(Dept dept){
+    String updateDeptById(Dept dept) {
         deptService.updateDeptById(dept);
         return "true";
     }
 
     /**
      * 条件查询
+     *
      * @param dept
      * @return
      */
-    @RequestMapping(value = "/selectDeptByCondition",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectDeptByCondition", method = RequestMethod.POST)
     @ResponseBody
-    List<Dept> selectDeptByCondition(Dept dept){
+    List<Dept> selectDeptByCondition(Dept dept) {
         List<Dept> depts = deptService.selectDeptByCondition(dept);
         return depts;
     }
 
     /**
      * 查询所有部门的数量
+     *
      * @return
      */
-    @RequestMapping(value = "/deptCount",method = RequestMethod.POST)
+    @RequestMapping(value = "/deptCount")
     @ResponseBody
-    int deptCount(){
+    int deptCount() {
         return deptService.deptCount();
     }
 
 
     /**
      * Excle 批量导入
+     *
      * @param file
      * @return
      */
-    @RequestMapping(value = "/addDepts",method = RequestMethod.POST)
+    @RequestMapping(value = "/addDepts", method = RequestMethod.POST)
     @ResponseBody
-    String  addDepts(MultipartFile file) throws Exception{
-        if(file==null){
+    String addDepts(MultipartFile file) throws Exception {
+        System.out.println("上传文件");
+        if (file == null) {
             return "false";
         }
         String fileName = file.getOriginalFilename();
-        long size=file.getSize();
-        if(fileName==null || ("").equals(fileName) && size==0)
+        long size = file.getSize();
+        if (fileName == null || ("").equals(fileName) && size == 0)
             return "false";
 
         System.out.println(fileName);
         // 获取文件后缀
-        String prefix=fileName.substring(fileName.lastIndexOf("."));
-        if (!prefix.toLowerCase().contains("xls") && !prefix.toLowerCase().contains("xlsx") ) {
+        String prefix = fileName.substring(fileName.lastIndexOf("."));
+        if (!prefix.toLowerCase().contains("xls") && !prefix.toLowerCase().contains("xlsx")) {
             return "false";
         }
 
-        final File excelFile = File.createTempFile(System.currentTimeMillis()+"", prefix);
+        final File excelFile = File.createTempFile(System.currentTimeMillis() + "", prefix);
         file.transferTo(excelFile);
 
 
-        boolean isExcel2003 = prefix.toLowerCase().endsWith("xls")?true:false;
+        boolean isExcel2003 = prefix.toLowerCase().endsWith("xls") ? true : false;
         Workbook workbook = null;
-        if(isExcel2003){
+        if (isExcel2003) {
             workbook = new HSSFWorkbook(new FileInputStream(excelFile));
-        }else{
+        } else {
             workbook = new XSSFWorkbook(new FileInputStream(excelFile));
         }
 
@@ -155,24 +165,24 @@ public class DeptController {
         List<Dept> depts = new ArrayList<>();
 
         Sheet sheet = workbook.getSheetAt(0);
-        for(int i=1; i<sheet.getLastRowNum()+1; i++) {
-            Row row =sheet.getRow(i);
-            if(row==null)
+        for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+            Row row = sheet.getRow(i);
+            if (row == null)
                 continue;
             Dept dept = new Dept();
-            for(int j=0;j<row.getLastCellNum();j++){
+            for (int j = 0; j < row.getLastCellNum(); j++) {
                 Cell cell = row.getCell(j);
-                if(cell!=null){
+                if (cell != null) {
                     cell.setCellType(CellType.STRING);
-                    if(j==0){
+                    if (j == 0) {
                         dept.setDeptNo(cell.getStringCellValue());
-                    }else if(j==1){
+                    } else if (j == 1) {
                         dept.setDeptName(cell.getStringCellValue());
-                    }else if(j==2){
+                    } else if (j == 2) {
                         dept.setParentId(Integer.valueOf(cell.getStringCellValue()));
-                    }else if(j==3){
+                    } else if (j == 3) {
                         dept.setDeptNature(cell.getStringCellValue());
-                    }else if(j==4){
+                    } else if (j == 4) {
                         dept.setRemarks(cell.getStringCellValue());
                     }
                 }
@@ -186,11 +196,8 @@ public class DeptController {
         }
         Boolean flag = deptService.addDepts(depts);
 
-        return flag?"true":"false";
+        return flag ? "true" : "false";
     }
-
-
-
 
 
 }

@@ -6,5 +6,62 @@
 -->
 
 <mapper namespace="com.example.mapper.UserMapper">
+    <resultMap id="userMap" type="user">
 
+        <result column="user_no" property="userNo"></result>
+        <result column="username" property="userName"></result>
+        <result column="dept_no" property="deptNo"></result>
+        <result column="dept_name" property="deptName"></result>
+        <result column="role_id" property="roleId"></result>
+        <result column="birthdate" property="birthDate"></result>
+    </resultMap>
+
+
+
+    <insert id="addUser">
+        insert into user(user_no, username, password, name, birthdate, sex, dept_no, dept_name, cellphone, email, role_id)
+        values (#{userNo},#{userName},#{password},#{name},#{birthDate},#{sex},#{deptNo},
+                #{deptName},#{cellphone},#{email},#{roleId})
+    </insert>
+    <update id="updateUserById">
+        update user
+        set user_no=#{userNo}, username=#{userName},password=#{password},name=#{name},birthdate=#{birthDate},
+            sex=#{sex},dept_no=#{deptNo},dept_name=#{deptName},cellphone=#{cellphone},
+            role_id=#{roleId} where id = #{id}
+    </update>
+    <delete id="deleteUserById">
+        delete from user where id = #{id}
+    </delete>
+    <delete id="deleteUserByIds">
+        delete from user where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectUserAll" resultMap="userMap">
+        select * from user
+    </select>
+
+    <select id="selectUserByCondition" resultMap="userMap">
+        select * from user
+        <where>
+            <if test="userNo!=null and userNo!=''">
+                and user_no like #{userNo}
+            </if>
+            <if test="userName!=null and userName!=''">
+                and username like #{userName}
+            </if>
+            <if test="name!=null and name!=''">
+                and name like #{name}
+            </if>
+        </where>
+    </select>
+    <select id="userCount" resultType="java.lang.Integer">
+        select count(*)
+        from user
+    </select>
+    <select id="login" resultMap="userMap">
+        select * from user where username=#{username} and password=#{password}
+    </select>
 </mapper>
