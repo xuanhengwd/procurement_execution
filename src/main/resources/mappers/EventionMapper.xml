@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.EventMapper">
+
+    <resultMap id="eventMapper" type="flow">
+
+        <result column="flow_name" property="flowName"></result>
+        <result column="flow_key" property="flowKey"></result>
+
+    </resultMap>
+
+    <select id="selectFlowByCondition" resultMap="eventMapper">
+        select * from flow
+        <where>
+            <if test="flowName!=null and flowName!=''">
+                and flow_name like #{flowName}
+            </if>
+
+        </where>
+    </select>
+    <select id="selectFlowById" resultMap="eventMapper">
+        select * from flow
+        where id = #{id}
+    </select>
+
+
+    <update id="updateFlowById">
+        update flow
+        set state = #{state}
+        where id = #{id}
+    </update>
+
+</mapper>

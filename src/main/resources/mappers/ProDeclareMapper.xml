@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.ProDeclareMapper">
+
+    <select id="selectProDeclareByCondition" resultType="com.example.pojo.ProDeclare">
+        select * from pro_declare
+        <where>
+            <if test="pro_name!=null and pro_name!=''">
+                and pro_name like #{pro_name}
+            </if>
+        </where>
+    </select>
+</mapper>

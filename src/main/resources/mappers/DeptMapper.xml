@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.DeptMapper">
+
+    <resultMap id="deptMap" type="dept">
+
+        <result column="dept_no" property="deptNo"></result>
+        <result column="dept_name" property="deptName"></result>
+        <result column="dept_nature" property="deptNature"></result>
+        <result column="parent_id" property="parentId"></result>
+    </resultMap>
+
+
+    <!--添加部门信息-->
+    <insert id="addDept">
+        insert into department
+        values (null,#{deptNo},#{deptName},#{parentId},#{deptNature},#{remarks})
+    </insert>
+
+    <!--批量添加-->
+    <insert id="addDepts">
+        insert into department(dept_no, dept_name, parent_id, dept_nature, remarks) values
+        <foreach collection="depts" item="dept" separator=",">
+           ( #{dept.deptNo},
+            #{dept.deptName},
+            #{dept.parentId},
+            #{dept.deptNature},
+            #{dept.remarks} )
+        </foreach>
+    </insert>
+
+    <!--修改-->
+    <update id="updateDeptById">
+        update department
+        set dept_no=#{deptNo},dept_name=#{deptName},parent_id=#{parentId},
+            dept_nature=#{deptNature},remarks=#{remarks}
+        where id=#{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteDeptById">
+        delete from department where id=#{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteDeptByIds">
+        delete from department where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+
+    </delete>
+
+
+    <!--查询所有-->
+    <select id="selectDeptAll" resultMap="deptMap">
+        select * from department
+    </select>
+
+    <!--条件查询-->
+    <select id="selectDeptByCondition" resultMap="deptMap">
+        select * from department
+        <where>
+            <if test="deptName!=null and deptName!=''">
+                and dept_name like #{deptName}
+            </if>
+            <if test="deptNo!=null and deptNo!=''">
+                and dept_no like #{deptNo}
+            </if>
+        </where>
+
+
+    </select>
+
+    <!--数量-->
+    <select id="deptCount" resultType="java.lang.Integer">
+        select count(*)
+        from department;
+    </select>
+</mapper>

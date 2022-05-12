@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.RoleMapper">
+    <insert id="addRole" useGeneratedKeys="true" keyProperty="id">
+        insert into role(name,description) values (#{name},#{description})
+    </insert>
+
+    <update id="updateRoleById">
+        update role set name=#{name},description=#{description}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteRoleById">
+        delete from role where id = #{id}
+    </delete>
+    <delete id="deleteRoleByIds">
+        delete from role where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectRoleAll" resultType="com.example.pojo.Role">
+        select * from role
+    </select>
+    <select id="roleCount" resultType="java.lang.Integer">
+        select count(*) from role
+    </select>
+    <select id="selectRoleByCondition" resultType="com.example.pojo.Role">
+        select * from role
+        <where>
+            <if test="name!=null and name!=''">
+                and name like #{name}
+            </if>
+        </where>
+    </select>
+</mapper>
