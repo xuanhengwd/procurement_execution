@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                   xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                   xmlns:activiti="http://activiti.org/bpmn"
+                   id="sample-diagram"
+                   targetNamespace="http://bpmn.io/schema/bpmn"
+                   xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="winBiding" name="中标审核" isExecutable="true">
+        <bpmn2:startEvent id="StartWinBiding" name="开始">
+            <bpmn2:outgoing>winBidingFlow0</bpmn2:outgoing>
+        </bpmn2:startEvent>
+        <bpmn2:userTask id="winBidingTask1" name="中标信息申请人" activiti:assignee="${assignee1}">
+            <bpmn2:incoming>winBidingFlow0</bpmn2:incoming>
+            <bpmn2:outgoing>winBidingFlow1</bpmn2:outgoing>
+        </bpmn2:userTask>
+        <bpmn2:userTask id="winBidingTask2" name="项目负责人" activiti:assignee="${assignee2}">
+            <bpmn2:incoming>winBidingFlow1</bpmn2:incoming>
+            <bpmn2:outgoing>winBidingFlow2</bpmn2:outgoing>
+            <bpmn2:outgoing>winBidingFlow4</bpmn2:outgoing>
+        </bpmn2:userTask>
+        <bpmn2:userTask id="winBidingTask3" name="采购执行人" activiti:assignee="${assignee3}">
+            <bpmn2:incoming>winBidingFlow2</bpmn2:incoming>
+            <bpmn2:outgoing>winBidingFlow3</bpmn2:outgoing>
+            <bpmn2:outgoing>winBidingFlow5</bpmn2:outgoing>
+        </bpmn2:userTask>
+        <bpmn2:sequenceFlow id="winBidingFlow0" sourceRef="StartWinBiding" targetRef="winBidingTask1"/>
+        <bpmn2:sequenceFlow id="winBidingFlow1" sourceRef="winBidingTask1" targetRef="winBidingTask2"/>
+        <bpmn2:sequenceFlow id="winBidingFlow2" sourceRef="winBidingTask2" targetRef="winBidingTask3">
+            <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${result==1}</bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:endEvent id="EndWinBiding_success" name="中标通过">
+            <bpmn2:incoming>winBidingFlow3</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:endEvent id="EndWinBiding_fail" name="中标拒绝">
+            <bpmn2:incoming>winBidingFlow4</bpmn2:incoming>
+            <bpmn2:incoming>winBidingFlow5</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:sequenceFlow id="winBidingFlow3" sourceRef="winBidingTask3" targetRef="EndWinBiding_success">
+            <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${result==1}</bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id="winBidingFlow4" sourceRef="winBidingTask2" targetRef="EndWinBiding_fail">
+            <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${result==0}</bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id="winBidingFlow5" sourceRef="winBidingTask3" targetRef="EndWinBiding_fail">
+            <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${result==0}</bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="winBiding">
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartWinBiding">
+                <dc:Bounds x="180" y="103" width="36" height="36"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="187" y="146" width="22" height="14"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="UserTask_19a1qfa_di" bpmnElement="winBidingTask1">
+                <dc:Bounds x="356" y="81" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="UserTask_164sqp1_di" bpmnElement="winBidingTask2">
+                <dc:Bounds x="725" y="81" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="UserTask_153exoj_di" bpmnElement="winBidingTask3">
+                <dc:Bounds x="1088" y="81" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="SequenceFlow_1vwzlji_di" bpmnElement="winBidingFlow0">
+                <di:waypoint x="216" y="121"/>
+                <di:waypoint x="356" y="121"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_0ase0mf_di" bpmnElement="winBidingFlow1">
+                <di:waypoint x="456" y="121"/>
+                <di:waypoint x="725" y="121"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_1xhoquv_di" bpmnElement="winBidingFlow2">
+                <di:waypoint x="825" y="121"/>
+                <di:waypoint x="1088" y="121"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape id="EndEvent_15uacfj_di" bpmnElement="EndWinBiding_success">
+                <dc:Bounds x="1379" y="103" width="36" height="36"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="1375" y="146" width="44" height="14"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="EndEvent_1uqxta3_di" bpmnElement="EndWinBiding_fail">
+                <dc:Bounds x="918" y="425" width="36" height="36"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="914" y="468" width="44" height="14"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="SequenceFlow_0ebsvgy_di" bpmnElement="winBidingFlow3">
+                <di:waypoint x="1188" y="121"/>
+                <di:waypoint x="1379" y="121"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_1yp4852_di" bpmnElement="winBidingFlow4">
+                <di:waypoint x="775" y="161"/>
+                <di:waypoint x="775" y="443"/>
+                <di:waypoint x="918" y="443"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_0o4yz9m_di" bpmnElement="winBidingFlow5">
+                <di:waypoint x="1138" y="161"/>
+                <di:waypoint x="1138" y="443"/>
+                <di:waypoint x="954" y="443"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

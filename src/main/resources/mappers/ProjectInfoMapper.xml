@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace:名称空间 必须对应接口的全限定名
+-->
+
+<mapper namespace="com.example.mapper.ProjectInfoMapper">
+
+
+    <insert id="addProjectInfo">
+        insert into project_info(pro_no, pro_name, contract_no, contract_name, bid_price, bid_winner, bid_date, bid_linkman, bid_tel,
+                                 bid_reason, funds_no, funds_name, funds_type, dept_no, dept_name, app_category_no,
+                                 app_category_name, apply_reason, budget, dept_principal_no, dept_principal_name,
+                                 pro_principal_name, pro_principal_no, fund_source, budget_year, remark,
+                                 pur_typeno, pur_typename, pru_biddocu, pru_contractdocu, pru_operno,
+                                 pru_opername, oper_date, remark1, Zfzd1, Szzd1, Rqzd1) VALUES
+        (#{pro_no},#{pro_name},#{contract_no},#{contract_name},#{bid_price},#{bid_winner},#{bid_date},#{bid_linkman},#{bid_tel},
+         #{bid_reason},#{funds_no},#{funds_name},#{funds_type},#{dept_no},#{dept_name},#{app_category_no},#{app_category_name},#{apply_reason},
+         #{budget},#{dept_principal_no},#{dept_principal_name},#{pro_principal_name},#{pro_principal_no},#{fund_source},#{budget_year},#{remark},#{pur_typeno},
+         #{pur_typename},#{pru_biddocu},#{pru_contractdocu},#{pru_operno},#{pru_opername},#{oper_date},#{remark1},#{Zfzd1},#{Szzd1},
+         #{Rqzd1})
+    </insert>
+    <update id="updateProjectInfo">
+        update project_info
+        set bid_price = #{bid_price},bid_winner = #{bid_winner},bid_date = #{bid_date},bid_linkman = #{bid_linkman},bid_tel = #{bid_tel},
+            bid_reason = #{bid_reason}
+
+    </update>
+
+    <select id="selectProjectInfoByCondition" resultType="com.example.pojo.ProjectInfo">
+        select * from project_info
+        <where>
+            <if test="pro_name!=null and pro_name!=''">
+                and pro_name like #{pro_name}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" resultType="com.example.pojo.ProjectInfo">
+        select * from project_info where id = #{id}
+    </select>
+</mapper>
