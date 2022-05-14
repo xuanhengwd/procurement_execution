@@ -23,7 +23,7 @@ public class ProDeclare {
     private String app_category_no;
     private String app_category_name;
     private String apply_reason;
-    private String budget;
+    private Double budget;
     private String dept_principal_no;
     private String dept_principal_name;
     private String pro_principal_name;
@@ -172,19 +172,27 @@ public class ProDeclare {
         if (state == null){
             return "未知";
         }else if("0".equals(state)){
-            return "未审";
+            return "拒绝";
         }else if("1".equals(state)){
             return "审核中";
         }else if("2".equals(state)){
             return "审核完结";
         }else if("3".equals(state)){
-            return "驳回";
+            return "招标未审";
         }else if("4".equals(state)){
-            return "采购执行";
+            return "招标审核";
         }else if("5".equals(state)){
-            return "合同签订";
+            return "中标未审";
+        }else if("6".equals(state)){
+            return "中标审核";
+        }else if("7".equals(state)){
+            return "合同未审";
+        }else if("8".equals(state)){
+            return "合同审核";
+        }else if("9".equals(state)){
+            return "验货未审";
         }else{
-            return "到货验货";
+            return "验货审核";
         }
     }
 
@@ -217,11 +225,11 @@ public class ProDeclare {
         this.apply_reason = apply_reason;
     }
 
-    public String getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
-    public void setBudget(String budget) {
+    public void setBudget(Double budget) {
         this.budget = budget;
     }
 

@@ -55,4 +55,10 @@ public interface UserService {
      * @return
      */
     User login(String username,String password);
+
+
+    /**
+     * 根据userNO获取
+     */
+    User selectUserByNo(String userNo);
 }

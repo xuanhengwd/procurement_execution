@@ -71,4 +71,11 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.login(username, password);
         return user;
     }
+
+    @Override
+    public User selectUserByNo(String userNo) {
+
+        User user = userMapper.selectUserByNo(userNo);
+        return user;
+    }
 }

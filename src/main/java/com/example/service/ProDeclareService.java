@@ -17,4 +17,26 @@ public interface ProDeclareService {
      * @return
      */
     List<ProDeclare> selectProDeclareByCondition(ProDeclare proDeclare,int curPage,int pageCount);
+
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    ProDeclare selectProDeclareById(int id);
+
+    /**
+     * 根据编号查询
+     * @param proNo
+     * @return
+     */
+    ProDeclare selectProDeclareByNo(String proNo);
+
+    /**
+     * 修改状态
+     * @param id
+     * @param state
+     */
+    void updateStateById(int id,String state);
 }

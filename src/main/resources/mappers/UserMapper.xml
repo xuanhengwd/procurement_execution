@@ -64,4 +64,7 @@
     <select id="login" resultMap="userMap">
         select * from user where username=#{username} and password=#{password}
     </select>
+    <select id="selectUserByNo" resultType="com.example.pojo.User">
+        select * from user where user_no = #{userNo}
+    </select>
 </mapper>

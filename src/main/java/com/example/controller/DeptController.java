@@ -119,7 +119,7 @@ public class DeptController {
     @RequestMapping(value = "/selectDeptByCondition", method = RequestMethod.POST)
     @ResponseBody
     List<Dept> selectDeptByCondition(Dept dept, int curPage, int pageCount) {
-        System.out.println(dept);
+        //System.out.println(dept);
         List<Dept> depts = deptService.selectDeptByCondition(dept,curPage,pageCount);
         //  System.out.println(depts);
         return depts;

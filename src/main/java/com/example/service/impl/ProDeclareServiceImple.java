@@ -30,4 +30,22 @@ public class ProDeclareServiceImple implements ProDeclareService {
         return proDeclares;
 
     }
+
+    @Override
+    public ProDeclare selectProDeclareById(int id) {
+
+        ProDeclare proDeclare = proDeclareMapper.selectById(id);
+        return proDeclare;
+    }
+
+    @Override
+    public ProDeclare selectProDeclareByNo(String proNo) {
+        ProDeclare proDeclare = proDeclareMapper.selectByNo(proNo);
+        return proDeclare;
+    }
+
+    @Override
+    public void updateStateById(int id, String state) {
+        proDeclareMapper.updateStateById(id,state);
+    }
 }

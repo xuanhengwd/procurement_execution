@@ -31,4 +31,22 @@ public interface ActivitiService {
      * @return
      */
     String deleteDeployment(String deployId);
+
+
+    /**
+     * 开启任务
+     * @param key
+     * @return
+     */
+    String startProcess(String key,String businessKey);
+
+
+    /**
+     * 完成任务
+     * @param processInstanceId
+     * @param assignee
+     * @return
+     */
+    String completeTask(String processInstanceId,int assignee,int flag);
+
 }

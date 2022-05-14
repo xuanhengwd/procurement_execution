@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -157,6 +159,16 @@ class ProexecuBackApplicationTests {
             repositoryService.deleteDeployment(deploymentId,true);
         }
 
+
+    }
+
+
+    @Test
+    public void test(){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String format = sdf.format(new Date());
+        System.out.println("=>>>>>>>>>"+format);
 
     }
 

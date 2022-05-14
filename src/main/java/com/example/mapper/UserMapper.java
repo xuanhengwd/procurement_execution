@@ -53,5 +53,9 @@ public interface UserMapper {
     User login(@Param("username") String username,@Param("password") String password);
 
 
+    //根据编号查询
+    User selectUserByNo(String userNo);
+
+
 
 }
