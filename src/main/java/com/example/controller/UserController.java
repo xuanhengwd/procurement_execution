@@ -2,6 +2,8 @@ package com.example.controller;
 
 import com.example.pojo.User;
 import com.example.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,11 @@ import java.util.List;
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
+
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -41,6 +48,7 @@ public class UserController {
     @ResponseBody
     String addUser(User user){
         System.out.println(user);
+        user.setPassword(encoder.encode(user.getPassword()));
         userService.addUser(user);
         return "true";
     }
@@ -102,12 +110,25 @@ public class UserController {
         return userService.userCount();
     }
 
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     User login(String username, String password, HttpSession session){
 
-        User user = userService.login(username, password);
-
+        User user = userService.login(username);
+        if (user==null){
+            return null;
+        }
+        if(!encoder.matches(password,user.getPassword())){
+            return null;
+        }
 //        session.setAttribute("user",user);
 //
 //        System.out.println("login-----");

@@ -9,7 +9,7 @@
                    targetNamespace="http://bpmn.io/schema/bpmn"
                    xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
     <bpmn2:process id="check" name="验收审核" isExecutable="true">
-        <bpmn2:startEvent id="StartCheck">
+        <bpmn2:startEvent id="StartCheck" name="开始">
             <bpmn2:outgoing>SequenceFlow_0ao8afb</bpmn2:outgoing>
         </bpmn2:startEvent>
         <bpmn2:endEvent id="EndCheck_success" name="验收成功">

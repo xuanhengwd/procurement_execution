@@ -3,6 +3,7 @@ package com.example.mapper;
 import com.example.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 @Mapper
@@ -12,6 +13,9 @@ public interface UserMapper {
      * @return
      */
     List<User> selectUserAll();
+
+
+    User selectUserById(int id);
 
     /**
      * 添加用户
@@ -50,7 +54,7 @@ public interface UserMapper {
 
     int userCount();
 
-    User login(@Param("username") String username,@Param("password") String password);
+    User login(@Param("username") String username);
 
 
     //根据编号查询

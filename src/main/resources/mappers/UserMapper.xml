@@ -62,9 +62,12 @@
         from user
     </select>
     <select id="login" resultMap="userMap">
-        select * from user where username=#{username} and password=#{password}
+        select * from user where username=#{username}
     </select>
     <select id="selectUserByNo" resultType="com.example.pojo.User">
         select * from user where user_no = #{userNo}
+    </select>
+    <select id="selectUserById" resultMap="userMap">
+        select * from user where id = #{id}
     </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.pojo.Contract;
 import com.example.pojo.ProDeclare;
 import com.example.pojo.ProjectInfo;
 import com.example.pojo.User;
@@ -65,8 +66,6 @@ public class TaskController {
             return proDeclares;
         }
         return null;
-
-
     }
 
 
@@ -88,6 +87,7 @@ public class TaskController {
         String assignee = ""+userId;
         String businessKey = ""+proId;
         //判断是不是最终执行人
+        // TODO: 2022/5/17 之后需要修改
         ProDeclare proDeclare = proDeclareService.selectProDeclareById(proId);
         String deptPrincipalNo = proDeclare.getDept_principal_no();
         //根据编号获取id
@@ -106,6 +106,7 @@ public class TaskController {
             if(flag == 0){
                 //修改状态为拒绝
                 proDeclareService.updateStateById(proId,"0");
+                //进度表修改成任务完成1 状态改为拒绝3
             }else if(userId==user.getId()){
                 //获取当前状态
                 String stateStr = proDeclare.getState();
@@ -116,7 +117,9 @@ public class TaskController {
                 }else if("6".equals(stateStr)){
                     //中标审核==》》合同信息表 ===  明细表
                     // TODO: 2022/5/14 合同信息表生成
-
+                    //获取项目信息表
+                    ProjectInfo projectInfo = projectInfoService.selectProjectInfoByProNo(proDeclare.getPro_no());
+                    creatContract(projectInfo);
                     System.out.println("----");
                 }
 
@@ -153,13 +156,20 @@ public class TaskController {
         projectInfo.setDept_principal_name(proDeclare.getDept_principal_name());
         projectInfo.setPro_principal_name(proDeclare.getPro_principal_name());
         projectInfo.setPro_principal_no(proDeclare.getPro_principal_no());
-
+        projectInfo.setPru_operno(proDeclare.getApplicant_no());
+        projectInfo.setPru_opername(proDeclare.getApplicant_name());
         projectInfoService.addProjectInfo(projectInfo);
 
 
 
     }
 
-    void creatContract(){}
+    void creatContract(ProjectInfo projectInfo){
+
+        Contract contract = new Contract();
+
+        contract.setContract_no("");
+
+    }
 
 }

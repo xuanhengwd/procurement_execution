@@ -24,6 +24,7 @@ public interface ProjectInfoService {
     List<ProjectInfo> selectProjectInfoByCondition(ProjectInfo projectInfo, int curPage, int pageCount);
 
 
+
     /**
      * 更新
      * @param projectInfo
@@ -31,5 +32,8 @@ public interface ProjectInfoService {
     void updateProjectInfo(ProjectInfo projectInfo);
 
     ProjectInfo selectProjectInfoById(int id);
+
+
+    ProjectInfo selectProjectInfoByProNo(String proNo);
 
 }

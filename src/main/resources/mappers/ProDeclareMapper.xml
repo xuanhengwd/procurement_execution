@@ -17,8 +17,13 @@
             <if test="pro_name!=null and pro_name!=''">
                 and pro_name like #{pro_name}
             </if>
+            and applicant_no = #{applicant_no}
         </where>
     </select>
+
+
+
+
     <select id="selectById" resultType="com.example.pojo.ProDeclare">
         select * from pro_declare where id = #{id}
     </select>

@@ -10,6 +10,7 @@ import org.activiti.engine.task.Task;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,12 +33,16 @@ class ProexecuBackApplicationTests {
     @Autowired
     HistoryService historyService;
 
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     @Test
     void contextLoads() {
         //部署
         Deployment deploy = repositoryService.createDeployment()
-                .name("采购执行申请")
-                .addClasspathResource("bpmn/Myprocess.bpmn")
+                .name("请假申请")
+                .addClasspathResource("bpmn/test.bpmn20.xml")
                 .deploy();
 
         //输出部署信息
@@ -171,5 +176,17 @@ class ProexecuBackApplicationTests {
         System.out.println("=>>>>>>>>>"+format);
 
     }
+
+    @Test
+    public void tes2(){
+
+
+        System.out.println(encoder.encode("admin"));
+        System.out.println(encoder.encode("1"));
+        System.out.println(encoder.encode("1"));
+        System.out.println(encoder.encode("1"));
+        System.out.println(encoder.encode("test1"));
+    }
+
 
 }

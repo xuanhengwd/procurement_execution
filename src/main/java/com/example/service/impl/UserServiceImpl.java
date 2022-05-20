@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User selectById(int id) {
+        User user = userMapper.selectUserById(id);
+        return user;
+    }
+
+    @Override
     public void addUser(User user) {
         userMapper.addUser(user);
     }
@@ -67,8 +73,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String username, String password) {
-        User user = userMapper.login(username, password);
+    public User login(String username) {
+        User user = userMapper.login(username);
         return user;
     }
 

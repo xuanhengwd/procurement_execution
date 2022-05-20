@@ -48,4 +48,11 @@ public class ProjectInfoServiceImol implements ProjectInfoService {
         ProjectInfo projectInfo = projectInfoMapper.selectById(id);
         return projectInfo;
     }
+
+    @Override
+    public ProjectInfo selectProjectInfoByProNo(String proNo) {
+
+        ProjectInfo projectInfo = projectInfoMapper.selectByProNo(proNo);
+        return projectInfo;
+    }
 }

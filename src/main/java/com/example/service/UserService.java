@@ -11,6 +11,8 @@ public interface UserService {
      */
     List<User> selectUserAll(int curPage,int pageCount);
 
+    User selectById(int id);
+
     /**
      * 添加用户
      * @param user
@@ -51,10 +53,9 @@ public interface UserService {
     /**
      * 登录
      * @param username
-     * @param password
      * @return
      */
-    User login(String username,String password);
+    User login(String username);
 
 
     /**
