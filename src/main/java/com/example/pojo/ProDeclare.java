@@ -178,21 +178,27 @@ public class ProDeclare {
         }else if("2".equals(state)){
             return "审核完结";
         }else if("3".equals(state)){
-            return "申报信息未审";
+            return "采购信息未审";
         }else if("4".equals(state)){
-            return "申报信息审核中";
+            return "采购信息审核中";
         }else if("5".equals(state)){
             return "中标未审";
         }else if("6".equals(state)){
             return "中标审核中";
         }else if("7".equals(state)){
-            return "合同未审";
+            return "合同信息未审";
         }else if("8".equals(state)){
-            return "合同审核中";
+            return "合同信息审核中";
         }else if("9".equals(state)){
+            return "合同文本未审";
+        }else if("10".equals(state)){
+            return "合同文本审核";
+        }else if("11".equals(state)){
             return "验货未审";
-        }else{
+        }else if("12".equals(state)){
             return "验货审核中";
+        }else{
+            return "采购执行完成";
         }
     }
 

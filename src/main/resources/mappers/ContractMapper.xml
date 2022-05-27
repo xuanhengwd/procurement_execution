@@ -14,6 +14,15 @@
         values (#{contract_no},#{contract_name},#{applicant_no},#{applicant},
                 #{dept_name},#{dept_no},#{pro_no},#{pro_name})
     </insert>
+    <update id="updateById">
+        update contract set packageName=#{packageName},baoxqx=#{baoxqx},amount=#{amount},jiaohrq=#{jiaohrq},
+                            jiaf=#{jiaf},yif=#{yif},bingf=#{bingf},tel_jiaf=#{tel_jiaf},
+                            tel_yif=#{tel_yif},tel_bingf=#{tel_bingf},jbrq=#{jbrq}
+        where id = #{id}
+
+
+
+    </update>
     <select id="selectContractByCondition" resultType="com.example.pojo.Contract">
         select * from contract
         <where>

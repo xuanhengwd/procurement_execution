@@ -38,6 +38,9 @@ public class ActivitiServiceImpl implements ActivitiService {
      */
     public String deployment(String name,String key,String path){
         //部署
+//        String imgPath = "bpmn/"+key+".png";
+
+
         Deployment deploy = null;
         try {
             deploy = repositoryService.createDeployment()

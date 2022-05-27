@@ -27,6 +27,8 @@ public class Contract {
     private String tel_bingf;
     private String jbrq;
 
+    private String contract_path;
+
     @Override
     public String toString() {
         return "Contract{" +
@@ -34,7 +36,7 @@ public class Contract {
                 ", contract_no='" + contract_no + '\'' +
                 ", contract_name='" + contract_name + '\'' +
                 ", applicant_no='" + applicant_no + '\'' +
-                ", applicant_name='" + applicant + '\'' +
+                ", applicant='" + applicant + '\'' +
                 ", purBuTypeName='" + purBuTypeName + '\'' +
                 ", purBuType='" + purBuType + '\'' +
                 ", caigfsh='" + caigfsh + '\'' +
@@ -54,7 +56,16 @@ public class Contract {
                 ", tel_yif='" + tel_yif + '\'' +
                 ", tel_bingf='" + tel_bingf + '\'' +
                 ", jbrq='" + jbrq + '\'' +
+                ", contract_path='" + contract_path + '\'' +
                 '}';
+    }
+
+    public String getContract_path() {
+        return contract_path;
+    }
+
+    public void setContract_path(String contract_path) {
+        this.contract_path = contract_path;
     }
 
     public Integer getId() {

@@ -129,11 +129,8 @@ public class UserController {
         if(!encoder.matches(password,user.getPassword())){
             return null;
         }
-//        session.setAttribute("user",user);
-//
-//        System.out.println("login-----");
-//        System.out.println(session.getAttribute("user"));
-        //System.out.println(user);
+
+
         return user;
     }
 

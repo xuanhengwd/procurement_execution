@@ -8,7 +8,7 @@ public class CheckProcess {
     private String pro_name;
     private String bus_type;
 
-    private Integer applicant_id;
+    private String applicant_no;
     private String applicant;
     private String audit_date;
     private String audit_opinion;
@@ -22,7 +22,7 @@ public class CheckProcess {
                 ", pro_no='" + pro_no + '\'' +
                 ", pro_name='" + pro_name + '\'' +
                 ", bus_type='" + bus_type + '\'' +
-                ", applicant_id=" + applicant_id +
+                ", applicant_id=" + applicant_no +
                 ", applicant='" + applicant + '\'' +
                 ", audit_date='" + audit_date + '\'' +
                 ", audit_opinion='" + audit_opinion + '\'' +
@@ -60,13 +60,13 @@ public class CheckProcess {
     }
     public String getBus_typeStr(){
         if("1".equals(bus_type)){
-            return "招标审核";
+            return "采购信息审核";
         }else if("2".equals(bus_type)){
             return "中标审核";
         }else if("3".equals(bus_type)){
-            return "明细审核";
+            return "合同信息审核";
         }else if("4".equals(bus_type)){
-            return "合同审核";
+            return "合同文本审核";
         }else {
             return "验收审核";
         }
@@ -76,12 +76,12 @@ public class CheckProcess {
         this.bus_type = bus_type;
     }
 
-    public Integer getApplicant_id() {
-        return applicant_id;
+    public String getApplicant_no() {
+        return applicant_no;
     }
 
-    public void setApplicant_id(Integer applicant_id) {
-        this.applicant_id = applicant_id;
+    public void setApplicant_no(String applicant_no) {
+        this.applicant_no = applicant_no;
     }
 
     public String getApplicant() {

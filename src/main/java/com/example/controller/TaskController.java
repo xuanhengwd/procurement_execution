@@ -1,9 +1,7 @@
 package com.example.controller;
 
-import com.example.pojo.Contract;
-import com.example.pojo.ProDeclare;
-import com.example.pojo.ProjectInfo;
-import com.example.pojo.User;
+import com.example.pojo.*;
+import com.example.service.CheckProcessService;
 import com.example.service.ProDeclareService;
 import com.example.service.ProjectInfoService;
 import com.example.service.UserService;
@@ -38,6 +36,21 @@ public class TaskController {
     @Autowired
     private ProjectInfoService projectInfoService;
 
+    @Autowired
+    private CheckProcessService checkProcessService;
+
+    @RequestMapping(value = "/getProcessingTask", method = RequestMethod.POST)
+    @ResponseBody
+    List<CheckProcess> getProcessingTask(int id){
+
+        User user = userService.selectById(id);
+        String userNo = user.getUserNo();
+        List<CheckProcess> processingTasks = checkProcessService.getProcessingTask(userNo);
+        return processingTasks;
+    }
+
+
+/*
     //获取当前要办理的任务  直接返回业务的表
     @RequestMapping(value = "/getTask", method = RequestMethod.POST)
     @ResponseBody
@@ -70,17 +83,16 @@ public class TaskController {
 
 
 
-    // TODO: 2022/5/13 在办任务查询
-    //获取正在办理的任务  直接返回业务的表 （进度信息有待考虑  考虑用进度表  用业务id作业一个键来查询）
 
-
-    /**
+    */
+/**
      * 完成招标申请任务
      * @param userId
      * @param proId
      * @param flag
      * @return
-     */
+     *//*
+
     @RequestMapping(value = "/completeTask", method = RequestMethod.POST)
     @ResponseBody
     String completeTask(int userId,int proId,int flag){
@@ -163,13 +175,8 @@ public class TaskController {
 
 
     }
+*/
 
-    void creatContract(ProjectInfo projectInfo){
 
-        Contract contract = new Contract();
-
-        contract.setContract_no("");
-
-    }
 
 }

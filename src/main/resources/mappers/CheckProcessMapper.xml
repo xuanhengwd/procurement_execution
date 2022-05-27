@@ -9,7 +9,7 @@
 
     <insert id="addCheckProcess">
         insert into check_progress
-        values (null,#{pro_no},#{pro_name},#{bus_type},#{applicant_id},
+        values (null,#{pro_no},#{pro_name},#{bus_type},#{applicant_no},
                 #{applicant},#{audit_date},#{audit_opinion},
                 #{audit_state},#{audit_process} )
     </insert>
@@ -18,4 +18,12 @@
                                   audit_process=#{audit_process}
         where id = #{id}
     </update>
+    <select id="selectProcessingTask" resultType="com.example.pojo.CheckProcess">
+        select * from check_progress
+        where applicant_no = #{userNo} and audit_state = '1'
+        order by audit_date desc
+
+
+
+    </select>
 </mapper>

@@ -170,8 +170,8 @@ class ProexecuBackApplicationTests {
 
     @Test
     public void test(){
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("----");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         System.out.println("=>>>>>>>>>"+format);
 

@@ -19,6 +19,7 @@
             </if>
             and applicant_no = #{applicant_no}
         </where>
+        order by app_date desc
     </select>
 
 

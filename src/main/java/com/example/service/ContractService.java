@@ -17,4 +17,18 @@ public interface ContractService {
      * @return
      */
     List<Contract> selectContractByCondition(Contract contract,int curPage,int pageCount);
+
+
+    /**
+     * 更新
+     */
+    void updateById(Contract contract);
+
+
+    Contract selectContractById(int id);
+
+
+    Contract selectContractByProNo(String proNo);
+
+    void addContractPath(int id,String path);
 }

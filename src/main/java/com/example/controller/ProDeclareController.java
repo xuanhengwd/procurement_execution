@@ -53,9 +53,7 @@ public class ProDeclareController {
     @ResponseBody
     List<ProDeclare> selectProDeclareByCondition(@RequestParam("userId") int userId, ProDeclare proDeclare, int curPage, int pageCount) {
         //获取用户编号
-        System.out.println(userId);
         User user = userService.selectById(userId);
-        System.out.println(user);
         String userNo = user.getUserNo();
         //System.out.println(userNo);
         proDeclare.setApplicant_no(userNo);
@@ -209,7 +207,7 @@ public class ProDeclareController {
             process = ""+curProcess;
             checkProcess.setAudit_process(process);
             //当前的时间
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String curDate = sdf.format(new Date());
             checkProcess.setAudit_date(curDate);
             //更新

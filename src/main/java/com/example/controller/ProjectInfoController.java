@@ -45,7 +45,7 @@ public class ProjectInfoController {
 
 
     private final static String Key="winBiding";
-    private final static String busiType = "2"; //招标
+    private final static String busiType = "2"; //中标
     /**
      * 查询中标
      * @param projectInfo
@@ -227,7 +227,7 @@ public class ProjectInfoController {
             process = ""+curProcess;
             checkProcess.setAudit_process(process);
             //当前的时间
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String curDate = sdf.format(new Date());
             checkProcess.setAudit_date(curDate);
             //更新

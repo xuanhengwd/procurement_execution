@@ -75,7 +75,7 @@ public class EventController {
 
 
     /**
-     * 删除流程
+     * 禁用流程
      * @param id
      * @return
      */
@@ -87,7 +87,6 @@ public class EventController {
         String key = flow.getFlowKey();
         Integer state1 = flow.getState();
 
-        //已经删除了
         if(state1.equals(0)){
             return "error";
         }
