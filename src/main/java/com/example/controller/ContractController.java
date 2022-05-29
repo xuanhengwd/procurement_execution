@@ -44,6 +44,7 @@ public class ContractController {
     private final static String Key = "contractDetails";
 
     private final static String busiType = "3"; //合同信息
+    private final static String Curstate = "7";//状态
 
     /**
      * 合同查询
@@ -117,7 +118,7 @@ public class ContractController {
         }
         //判断是不是中标未审核状态
         String state = proDeclare.getState();
-        if (!"7".equals(state)) {
+        if (!Curstate.equals(state)) {
             return "error";
         }
 

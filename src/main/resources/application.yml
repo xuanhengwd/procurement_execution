@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      enabled: true
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -23,7 +27,6 @@ spring:
     history-level: full
 
 
-
     # =============================
     #自动检查、部署流程定义文件
 #    check-process-definitions: false
@@ -38,6 +41,8 @@ spring:
 
 
 
+
+
 #配置mybatis
 mybatis:
   #配置文件位置
@@ -48,7 +53,7 @@ mybatis:
 server:
   port: 8080
 
-gorit:
-  file:
-    root:
-      path: D:\dev\
+
+
+
+

@@ -192,7 +192,7 @@ public class ProDeclare {
         }else if("9".equals(state)){
             return "合同文本未审";
         }else if("10".equals(state)){
-            return "合同文本审核";
+            return "合同文本审核中";
         }else if("11".equals(state)){
             return "验货未审";
         }else if("12".equals(state)){

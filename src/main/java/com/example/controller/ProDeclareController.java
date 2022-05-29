@@ -238,7 +238,7 @@ public class ProDeclareController {
         projectInfo.setPru_operno(proDeclare.getApplicant_no());
         projectInfo.setPru_opername(proDeclare.getApplicant_name());
         projectInfo.setContract_no(proDeclare.getPro_no());
-        projectInfo.setContract_name("采购合同");
+        projectInfo.setContract_name(proDeclare.getPro_name()+"合同");
         projectInfoService.addProjectInfo(projectInfo);
 
 
