@@ -41,6 +41,15 @@ public class ProDeclareController {
     private final static String busiType = "1"; //招标
 
 
+
+    @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
+    @ResponseBody
+    List<ProDeclare> selectAll() {
+        List<ProDeclare> proDeclares = proDeclareService.selectProDeclareAll();
+        return proDeclares;
+
+    }
+
     /**
      * 查询采购信息
      *

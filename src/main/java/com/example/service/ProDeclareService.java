@@ -39,4 +39,6 @@ public interface ProDeclareService {
      * @param state
      */
     void updateStateById(int id,String state);
+
+    List<ProDeclare> selectProDeclareAll();
 }

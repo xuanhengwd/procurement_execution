@@ -4,6 +4,7 @@ package com.example.mapper;
 import com.example.pojo.ProDeclare;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -24,5 +25,8 @@ public interface ProDeclareMapper {
 
     void updateStateById(@Param("id") int id, @Param("state") String state);
 
+
+    @Select("select * from pro_declare")
+    List<ProDeclare> selectProDeclareAll();
 
 }
